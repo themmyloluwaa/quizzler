@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { fetchQuizQuestions, Difficulty, QuestionState } from "./API";
 import "./App.css";
+import { GlobalStyle } from "./App.styles";
 import QuestionCard from "./components/QuestionCard";
 
+// styles
 const TOTAL_QUESTIONS = 10;
 
 export type AnswerObject = {
@@ -76,34 +78,37 @@ const App = () => {
     }
   };
   return (
-    <div className="App">
-      <h1>Der Quizzler</h1>
-      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <button className="start" onClick={startTrivia}>
-          Play Now!
-        </button>
-      ) : null}
-      {!gameOver && <p className="score">Your Score is:</p>}
-      {loading && <p>Loading Questions ...</p>}
-      {!loading && !gameOver && (
-        <QuestionCard
-          questionNo={currentNumber + 1}
-          totalQuestion={TOTAL_QUESTIONS}
-          answers={questions[currentNumber].answers}
-          callback={checkAnswer}
-          question={questions[currentNumber].question}
-          userAnswer={userAnswers ? userAnswers[currentNumber] : undefined}
-        />
-      )}
-      {!gameOver &&
-        !loading &&
-        userAnswers.length === currentNumber + 1 &&
-        currentNumber + 1 !== TOTAL_QUESTIONS && (
-          <button className="next" onClick={nextQuestion}>
-            Next Question
+    <>
+      <GlobalStyle />
+      <div className="App">
+        <h1>Der Quizzler</h1>
+        {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+          <button className="start" onClick={startTrivia}>
+            Play Now!
           </button>
+        ) : null}
+        {!gameOver && <p className="score">Your Score is:{score}</p>}
+        {loading && <p>Loading Questions ...</p>}
+        {!loading && !gameOver && (
+          <QuestionCard
+            questionNo={currentNumber + 1}
+            totalQuestion={TOTAL_QUESTIONS}
+            answers={questions[currentNumber].answers}
+            callback={checkAnswer}
+            question={questions[currentNumber].question}
+            userAnswer={userAnswers ? userAnswers[currentNumber] : undefined}
+          />
         )}
-    </div>
+        {!gameOver &&
+          !loading &&
+          userAnswers.length === currentNumber + 1 &&
+          currentNumber + 1 !== TOTAL_QUESTIONS && (
+            <button className="next" onClick={nextQuestion}>
+              Next Question
+            </button>
+          )}
+      </div>
+    </>
   );
 };
 
