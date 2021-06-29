@@ -1,13 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import QuestionCard from "./components/QuestionCard";
+const App = () => {
+  const startTrivia = async () => {};
 
-function App() {
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
+
+  const nextQuestion = () => {};
   return (
     <div className="App">
-      Quizzler
+      <h1>Der Quizzler</h1>
+      <button className="start" onClick={startTrivia}>
+        Play Now!
+      </button>
+      <p className="score">Your Score is:</p>
+      <p>Loading Questions ...</p>
+      <QuestionCard />
+      <button className="next">Next Question</button>
     </div>
   );
-}
+};
 
 export default App;
