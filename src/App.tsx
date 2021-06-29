@@ -5,7 +5,7 @@ import QuestionCard from "./components/QuestionCard";
 
 const TOTAL_QUESTIONS = 10;
 
-type AnswerObject = {
+export type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
@@ -50,25 +50,31 @@ const App = () => {
     if (!gameOver) {
       const answer = e.currentTarget.value;
 
-      
-
       const correct = questions[currentNumber].correct_answer === answer;
 
       if (correct) {
-        setScore(score + 1)
+        setScore(score + 1);
       }
       const answerObject = {
         correct,
         answer,
         question: questions[currentNumber].question,
-        correctAnswer:  questions[currentNumber].correct_answer
+        correctAnswer: questions[currentNumber].correct_answer,
       };
 
       setUserAnswers([...userAnswers, answerObject]);
     }
   };
 
-  const nextQuestion = () => {};
+  const nextQuestion = () => {
+    const nextQuestionIndex = currentNumber + 1;
+
+    if (nextQuestionIndex === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setCurrentNumber(nextQuestionIndex);
+    }
+  };
   return (
     <div className="App">
       <h1>Der Quizzler</h1>
@@ -93,7 +99,9 @@ const App = () => {
         !loading &&
         userAnswers.length === currentNumber + 1 &&
         currentNumber + 1 !== TOTAL_QUESTIONS && (
-          <button className="next">Next Question</button>
+          <button className="next" onClick={nextQuestion}>
+            Next Question
+          </button>
         )}
     </div>
   );
