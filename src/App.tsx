@@ -1,41 +1,100 @@
 import React, { useState } from "react";
-import { fetchQuizQuestions, Difficulty } from "./API";
+import { fetchQuizQuestions, Difficulty, QuestionState } from "./API";
 import "./App.css";
 import QuestionCard from "./components/QuestionCard";
 
 const TOTAL_QUESTIONS = 10;
+
+type AnswerObject = {
+  question: string;
+  answer: string;
+  correct: boolean;
+  correctAnswer: string;
+};
 const App = () => {
-  const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [currentNumber, setCurrentNumber] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  console.log(fetchQuizQuestions(10, Difficulty.EASY));
-  const startTrivia = async () => {};
+  const resetGame = (): void => {
+    setScore(0);
+    setUserAnswers([]);
+    setCurrentNumber(0);
+  };
 
-  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
+  const startTrivia = async () => {
+    try {
+      setLoading(true);
+      setGameOver(false);
+
+      const newQuestions = await fetchQuizQuestions(
+        TOTAL_QUESTIONS,
+        Difficulty.EASY
+      );
+
+      setQuestions(newQuestions);
+      console.log(questions);
+      resetGame();
+    } catch (e) {
+      window.alert("An error has occured");
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!gameOver) {
+      const answer = e.currentTarget.value;
+
+      
+
+      const correct = questions[currentNumber].correct_answer === answer;
+
+      if (correct) {
+        setScore(score + 1)
+      }
+      const answerObject = {
+        correct,
+        answer,
+        question: questions[currentNumber].question,
+        correctAnswer:  questions[currentNumber].correct_answer
+      };
+
+      setUserAnswers([...userAnswers, answerObject]);
+    }
+  };
 
   const nextQuestion = () => {};
   return (
     <div className="App">
       <h1>Der Quizzler</h1>
-      <button className="start" onClick={startTrivia}>
-        Play Now!
-      </button>
-      <p className="score">Your Score is:</p>
-      <p>Loading Questions ...</p>
-      {/* <QuestionCard
-        questionNo={currentNumber + 1}
-        totalQuestion={TOTAL_QUESTIONS}
-        answers={questions[currentNumber].answers}
-        callback={checkAnswer}
-        question={questions[currentNumber].question}
-        isAnswered={false}
-        userAnswer={userAnswers ? userAnswers[currentNumber] : undefined}
-      /> */}
-      <button className="next">Next Question</button>
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <button className="start" onClick={startTrivia}>
+          Play Now!
+        </button>
+      ) : null}
+      {!gameOver && <p className="score">Your Score is:</p>}
+      {loading && <p>Loading Questions ...</p>}
+      {!loading && !gameOver && (
+        <QuestionCard
+          questionNo={currentNumber + 1}
+          totalQuestion={TOTAL_QUESTIONS}
+          answers={questions[currentNumber].answers}
+          callback={checkAnswer}
+          question={questions[currentNumber].question}
+          userAnswer={userAnswers ? userAnswers[currentNumber] : undefined}
+        />
+      )}
+      {!gameOver &&
+        !loading &&
+        userAnswers.length === currentNumber + 1 &&
+        currentNumber + 1 !== TOTAL_QUESTIONS && (
+          <button className="next">Next Question</button>
+        )}
     </div>
   );
 };
