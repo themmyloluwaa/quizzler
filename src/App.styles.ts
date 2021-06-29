@@ -10,7 +10,8 @@ import BGImageThree from "./images/three.jpeg";
 export const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
-  font-family: 'Lobster', cursive;
+  font-family: "Roboto Mono", monospace;
+
 }
 html {
   height: 100%;
@@ -42,7 +43,7 @@ export const Wrapper = styled.div`
   }
 
   h1 {
-    font-family: "Roboto Mono", monospace;
+    font-family: "Lobster", cursive;
     font-size: 80px;
     background-image: linear-gradient(180deg, #fff, #87f1ff);
     background-size: 100%;
