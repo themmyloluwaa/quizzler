@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { fetchQuizQuestions, Difficulty, QuestionState } from "./API";
 import "./App.css";
-import { GlobalStyle } from "./App.styles";
+import { GlobalStyle, Wrapper } from "./App.styles";
 import QuestionCard from "./components/QuestionCard";
 
 // styles
@@ -80,11 +80,11 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <div className="App">
+      <Wrapper className="App">
         <h1>Der Quizzler</h1>
         {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
           <button className="start" onClick={startTrivia}>
-            Play Now!
+            Play!
           </button>
         ) : null}
         {!gameOver && <p className="score">Your Score is:{score}</p>}
@@ -107,7 +107,7 @@ const App = () => {
               Next Question
             </button>
           )}
-      </div>
+      </Wrapper>
     </>
   );
 };
