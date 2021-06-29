@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   max-width: 1100px;
@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   padding: 20px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   text-align: center;
-
   p {
     font-size: 1rem;
   }
@@ -18,6 +17,8 @@ type ButtonWrapperProps = {
   correct: boolean;
   userClicked: boolean;
 };
+
+
 const wrongAnswer: (data: ButtonWrapperProps) => string = ({
   correct,
   userClicked,
@@ -28,6 +29,7 @@ const wrongAnswer: (data: ButtonWrapperProps) => string = ({
 
 export const ButtonWrapper = styled.div<ButtonWrapperProps>`
   transition: all 0.3s ease;
+  
 
   :hover {
     opacity: 0.8;
@@ -44,7 +46,6 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
       correct
         ? "linear-gradient(90deg, #56ffa4, #59bc86)"
         : wrongAnswer({ correct, userClicked })};
-
     border: 3px solid #fff;
     box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
     border-radius: 10px;

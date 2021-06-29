@@ -45,7 +45,7 @@ export const Wrapper = styled.div`
   h1 {
     font-family: "Lobster", cursive;
     font-size: 80px;
-    background-image: linear-gradient(180deg, #fff, #87f1ff);
+    background-image: linear-gradient(180deg, #fff, #ffeb3b);
     background-size: 100%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -56,6 +56,9 @@ export const Wrapper = styled.div`
     text-align: center;
     margin: 20px;
     font-weight: 400;
+    -webkit-box-reflect: below -120px linear-gradient(transparent, #0001);
+    text-shadow: 0 0 10px #ff8c3b, 0 0 40px #ff8c3b, 0 0 80px #ff8c3b,
+      0 0 160px #ff8c3b, 0 0 240px #ff8c3b;
   }
 
   .start,
