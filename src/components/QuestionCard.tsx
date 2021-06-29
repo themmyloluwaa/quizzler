@@ -32,6 +32,7 @@ const QuestionCard: React.FC<Props> = ({
             key={i}
           >
             <button
+              data-testid="optionsButton"
               value={answer}
               disabled={Boolean(userAnswer)}
               onClick={callback}

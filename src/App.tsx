@@ -38,7 +38,6 @@ const App = () => {
       );
 
       setQuestions(newQuestions);
-      console.log(questions);
       resetGame();
     } catch (e) {
       window.alert("An error has occured");
