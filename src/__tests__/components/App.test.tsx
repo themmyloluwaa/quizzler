@@ -18,9 +18,7 @@ describe("Application Tests", () => {
   });
 
   it("goes to the next question", async () => {
-    const { getByText, findAllByTestId, findByText } = render(
-      <App />
-    );
+    const { getByText, findAllByTestId, findByText } = render(<App />);
 
     const playBtn = getByText("Play!");
     fireEvent.click(playBtn);
