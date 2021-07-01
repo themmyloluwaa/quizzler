@@ -54,3 +54,7 @@ If you're reading this and you would like to hire me, please do not hesitate to 
 If you're not hiring and just stumbled upon this repository by chance, Hallo 🤩🤩🤩, I'm Temi and nice to meet you. Say Hi on Twitter [@themmyloluwaaa](http://twitter.com/themmyloluwaaa)
 
 Everyone is free to also fork this project to use but with attribution ofcourse 🥰🥰.
+
+**If you'd like to do this task from the beginning, checkout to the starter branch. It contains the basic setup of the application without any solution yet.**
+
+**In addition, try to tweak one or two things in your own implementation, or even add something magnificent, don't limit yourself to this small idea**
