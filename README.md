@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Quizzler
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+The purpose of this project is to demonstrate my experience working with the following technologies
 
-In the project directory, you can run:
+- Docker
+- Kubernetes
+- Git
+- CI/CD: CircleCI
+- GitOps: ArgoCD
+- Monitoring - Prometheus/Grafanna
+- Deployment - AWS
 
-### `npm start`
+Since I have web/mobile development experience where your skill and work can be easily seen through projects you've built in the past. I find it really hard to prove that I am knowledgible and skilled in the technologies used in DevOps and Cloud computing. I hope this tiny project provides the necessary prove for that.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project named **Quizzler** is small react project that users can take quizzes.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Most of the requirements of Quizzler is inspired from an interview I had with a company for a Junior DevOps Position.
 
-### `npm test`
+While this project is basic in all ramifications, and in a real world scenario, I would be handling complex projects containing thousands of microservices. The goal is to demonstrate my understanding of DevOps and its related skills.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Requirements of Quizzler
 
-### `npm run build`
+- Quizzler should be deployable in different data centers exposed to the internet with different URLs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The deployment should be packaged in such a way so that is fully compatible with a modern CI/CD tool e.g. ArgoCD, Flux, GitLab, Jenkins, Harness, Spinnaker
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- During deployment, the user should experience zero downtime
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The deployment should have the ability to rollback if needed
 
-### `npm run eject`
+- There should be an automated recovery in case of failure
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Environment
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Node 12+
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### How to run
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- first run `npm i` to install all dependencies
+- Then run `npm run start` to start the project.
 
-## Learn More
+#### How to test
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Run `npm run test` to start the test runner
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### How to read and my solution to the requirements
+
+There's a solution.md file in the root directory of the project that gives a detailed description of each technology used, the justification if needed and my approach to satisfying the requirements listed above.
+
+If you're reading this and you would like to hire me, please do not hesitate to reach out. My email is [codekagei@gmail.com](mailto:codekagei@gmail.com). I am currently looking for a Junior-Mid DevOps/SRE position where I can apply these skills and knowledge in real life projects. Thank you :)
+
+If you're not hiring and just stumbled upon this repository by chance, Hallo 🤩🤩🤩, I'm Temi and nice to meet you. Say Hi on Twitter [@themmyloluwaaa](http://twitter.com/themmyloluwaaa)
+
+Everyone is free to also fork this project to use but with attribution ofcourse 🥰🥰.
