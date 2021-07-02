@@ -40,3 +40,7 @@ The container platform I chose is Docker because:
 - Supported by all major cloud providers.
 
 The requirment _The deployment should be packaged in such a way so that is fully compatible with a modern CI/CD tool e.g. ArgoCD_ is also satisfied by the containerising of Quizzler. These CI/CD tools have support for containers, specifically docker containers which is a huge advantage for us.
+
+- I created two docker files, a docker-compose file for development and a `dockerprodbuild` script for building production images.
+- One of the docker file is for development and it has a .dev file extension. It's used by the compose file as the build context
+- The production docker file is used by the `dockerprodbuild` script for building the production image. The production image would be run using an nginx server to serve the built files.
