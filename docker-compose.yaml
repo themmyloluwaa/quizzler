@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  quizzler-dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    working_dir: /quizzler
+    volumes:
+      - ./:/quizzler
+      - /quizzler/node_modules
+    ports:
+      - 3000:3000

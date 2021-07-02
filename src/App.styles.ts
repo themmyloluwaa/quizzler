@@ -1,11 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 // @ts-ignore
-import BGImageOne from "./images/one.jpeg";
-// @ts-ignore
-import BGImageTwo from "./images/two.jpeg";
-// @ts-ignore
-import BGImageThree from "./images/three.jpeg";
+import BGImageThree from "./images/bridge.jpeg";
 
 export const GlobalStyle = createGlobalStyle`
 * {
