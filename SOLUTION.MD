@@ -44,3 +44,7 @@ The requirment _The deployment should be packaged in such a way so that is fully
 - I created two docker files, a docker-compose file for development and a `dockerprodbuild` script for building production images.
 - One of the docker file is for development and it has a .dev file extension. It's used by the compose file as the build context
 - The production docker file is used by the `dockerprodbuild` script for building the production image. The production image would be run using an nginx server to serve the built files.
+
+After successfully packaging Quizzler as a container locally, the next step was to integrate a CI platform to handle automation regarding the Quizzler project. I went with CircleCI because I have experience working with Github Actions, Gitlab CI/CD and TravisCI. I wanted to give CircleCI a try and add it to my skillset.
+
+I created a .circleci/config.yml file with holds all the configurations for the Quizzler pipeline. CircleCI comes with various features and I leveraged the orbs feature to make use of nodejs workflows. I added two jobs for now, a _test_ job to run all tests related to the project and a _build_ job to build the project binaries. I'd add other jobs to complete our pipeline below. After 10+ attempts and 2 successful attempts, a pipeline is setup to run and build tests on the main branch of Quizzler.
