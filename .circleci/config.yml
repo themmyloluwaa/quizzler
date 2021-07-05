@@ -8,7 +8,8 @@ jobs:
    steps:
     - checkout
     - run: | 
-        npm i  -g react-scripts
+        sudo npm i  -g react-scripts
+        npm run test
         
       
   build:
