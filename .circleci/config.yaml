@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.5.1
+jobs:
+  test:
+   executor: node/default
+   steps:
+    - checkout
+    - run: npm run test
+  build:
+    steps:
+      - run: docker --version
+
+
+    
+
+workflows:
+  version: 2
+  Test-Build-Publish-Deploy:
+    jobs:
+      - test
+      - build:
+         requires:
+           - test
