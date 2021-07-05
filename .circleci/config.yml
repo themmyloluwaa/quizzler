@@ -9,6 +9,7 @@ jobs:
     - checkout
     - run: | 
         sudo npm i  -g react-scripts
+        npm install typescript
         npm run test
         
       
