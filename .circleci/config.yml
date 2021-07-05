@@ -9,7 +9,7 @@ jobs:
     - checkout
     - run: | 
         npm i  -g react-scripts
-        npm run test
+        
       
   build:
     docker:
