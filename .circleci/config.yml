@@ -7,17 +7,20 @@ jobs:
    executor: node/default
    steps:
     - checkout
+    - node/install-packages
     - run: | 
-        sudo npm i  -g react-scripts
-        npm install typescript
         npm run test
-        
       
   build:
-    docker:
-      - image: cimg/node:12.0.0
+    executor: node/default
     steps:
-      - run: docker --version
+      - checkout
+      - run: |
+          npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./build
 
 
     
