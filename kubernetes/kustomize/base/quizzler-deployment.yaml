@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quizzler-deployment
+  labels:
+    app: quizzler
+  namespace: quizzler
+spec:
+  selector:
+    matchLabels:
+      app: quizzler
+  template:
+    metadata:
+      labels:
+        app: quizzler
+    spec:
+      containers:
+        - name: quizzler
+          image: codekagei/quizzler
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+              
