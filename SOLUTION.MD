@@ -24,6 +24,8 @@
 
 ## The Solution
 
+### Step One - Containerize Quizzler
+
 The first requirment states that _Quizzler should be deployable in different data centers which are exposed to the internet with different URLs._ From this statement, I can infer that Quizzler needs to be:
 
 - packaged in a way that it's platform agnostic meaning it can run anywhere. Considering that we can't guarantee that these data centers servers have the same environment in which Quizzler was developed, it needs to be packaged in a way that different environment isn't a limiting factor.
@@ -45,6 +47,14 @@ The requirment _The deployment should be packaged in such a way so that is fully
 - One of the docker file is for development and it has a .dev file extension. It's used by the compose file as the build context
 - The production docker file is used by the `dockerprodbuild` script for building the production image. The production image would be run using an nginx server to serve the built files.
 
+### Step Two - Setup Pipeline for Quizzler
+
 After successfully packaging Quizzler as a container locally, the next step was to integrate a CI platform to handle automation regarding the Quizzler project. I went with CircleCI because I have experience working with Github Actions, Gitlab CI/CD and TravisCI. I wanted to give CircleCI a try and add it to my skillset.
 
 I created a .circleci/config.yml file with holds all the configurations for the Quizzler pipeline. CircleCI comes with various features and I leveraged the orbs feature to make use of nodejs workflows. I added two jobs for now, a _test_ job to run all tests related to the project and a _build_ job to build the project binaries. I'd add other jobs to complete our pipeline below. After 10+ attempts and 2 successful attempts, a pipeline is setup to run and build tests on the main branch of Quizzler.
+
+### Step Three - Create k8s Deployment Configuration
+
+We have a CI pipeline on CircleCI that handles the testing and building of our application. While this isn't a complete pipeline, it's enough to get us started and move to the next phase. Writing the Quizzler deployment configuration. Since we want to deploy Quizzler to various data centers in the world, we'd need a tool or technology that empowers us to manage various servers called nodes and deploy Quizzler unto them in an easy way. This process is called container orchestration and Kubernetes is a technology that makes that very possible.
+
+Since we're getting to the production aspect of Quizzler, I created a new branch called `development` that contains the development artifacts of the Quizzler application. The `main` branch would serve as the production branch for the application.
