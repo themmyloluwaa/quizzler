@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: quizzler
-          image: codekagei/quizzler:0.0.1
+          image: codekagei/quizzler:0.1
           ports:
             - containerPort: 3000
           resources:
