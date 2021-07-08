@@ -1,0 +1,4 @@
+resources:
+  - quizzler-namespace.yaml
+  - quizzler-deployment.yaml
+  - quizzler-service.yaml
