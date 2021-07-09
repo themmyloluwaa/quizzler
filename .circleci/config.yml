@@ -22,7 +22,7 @@ jobs:
           root: .
           paths:
             - ./build
-            - ./kubernetes/kustomize/overlay
+            - ./kubernetes/kustomize/overlays
   publish:
     docker:
       - image: cimg/node:12.0.0
@@ -47,9 +47,9 @@ jobs:
       - run: |
           TAG=0.$CIRCLE_PREVIOUS_BUILD_NUM
           git clone https://github.com/themmyloluwaa/quizzler-deployment.git /tmp/quizzler-deployment
-          cd /tmp/quizzler-deployment/kubernetes//kustomize/overlays
-          cp -R /tmp/quizzler-deployment/kubernetes//kustomize/overlays/staging/kustomization.yaml ./staging/
-          sed -i "s/$\CI_TAG/$TAG/g" ./staging/kustomization.yaml
+          cd /tmp/quizzler-deployment/kubernetes/kustomize/overlays
+          sed 's/\(newTag\)\(.*\)/\1: '$TAG'/' ./staging/kustomization.yaml
+          cd -
           git config credential.helper 'cache --timeout=120'
           git config user.email "codekagei@gmail.com"
           git config user.name "Temiloluwa Philip Ojo"
