@@ -15,12 +15,30 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - node/install-packages
       - run: |
           npm run build
       - persist_to_workspace:
           root: .
           paths:
             - ./build
+            - ./kubernetes/kustomize/overlay
+  publish:
+    docker:
+      - image: cimg/node:12.0.0
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: |
+          cp -R /tmp/workspace/build ./build
+          TAG=0.$CIRCLE_BUILD_NUM
+          docker build -t codekagei/quizzler:$TAG .
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker push codekagei/egertes:$TAG
+          
+
 
 
     
@@ -33,3 +51,12 @@ workflows:
       - build:
          requires:
            - test
+      - publish:
+          requires:
+           - build
+          filters:
+            branches:
+              only:
+                - main
+            
+        
