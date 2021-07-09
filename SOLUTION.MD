@@ -58,3 +58,13 @@ I created a .circleci/config.yml file with holds all the configurations for the 
 We have a CI pipeline on CircleCI that handles the testing and building of our application. While this isn't a complete pipeline, it's enough to get us started and move to the next phase. Writing the Quizzler deployment configuration. Since we want to deploy Quizzler to various data centers in the world, we'd need a tool or technology that empowers us to manage various servers called nodes and deploy Quizzler unto them in an easy way. This process is called container orchestration and Kubernetes is a technology that makes that very possible.
 
 Since we're getting to the production aspect of Quizzler, I created a new branch called `development` that contains the development artifacts of the Quizzler application. The `main` branch would serve as the production branch for the application.
+
+### Step Four - Use Kustomize for templating, multi-stage deployment
+
+I opted in for using the Kustomize tool for managing the deployment of the Quizzler application in the cluster. Since it's come inbuilt with kubectl and it makes it easy to deploy the same deployment configurations to different environments, it's a great tool to integrate into our deployment effort.
+
+I created a kustomize folder in the kubernetes folder, and added a base folder that contains the deployment files for Quizzler and the kustomize configuration file. I also added an overlay folder that would contain the various environments that the cluster would be deployed. The deployment was ran with `kubectl apply -k base/` and kustomize ensured that the necessary resources and objects are deployed appropriately.
+
+### Step Five - Automatic Build and Tagging of Docker Image
+
+The next step is to automate the build and tagging of the Quizzler image. This would be included in the pipeline for the Quizzler application and it would only run on the main branch to ensure we don't build images at every commit. The main branch would serve as the branch handling the deployment of the Quizzler application to production.
