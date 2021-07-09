@@ -36,7 +36,7 @@ jobs:
           TAG=0.$CIRCLE_BUILD_NUM
           docker build -t codekagei/quizzler:$TAG .
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker push codekagei/egertes:$TAG
+          docker push codekagei/quizzler:$TAG
           
 
 
