@@ -37,6 +37,27 @@ jobs:
           docker build -t codekagei/quizzler:$TAG .
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker push codekagei/quizzler:$TAG
+
+  generateYAML:
+    docker:
+      - image: cimg/base:2020.06
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: |
+          TAG=0.$CIRCLE_PREVIOUS_BUILD_NUM
+          git clone https://github.com/themmyloluwaa/quizzler-deployment.git /tmp/quizzler-deployment
+          cd /tmp/quizzler-deployment/kubernetes//kustomize/overlays
+          cp -R /tmp/quizzler-deployment/kubernetes//kustomize/overlays/staging/kustomization.yaml ./staging/
+          sed -i "s/$\CI_TAG/$TAG/g" ./staging/kustomization.yaml
+          git config credential.helper 'cache --timeout=120'
+          git config user.email "codekagei@gmail.com"
+          git config user.name "Temiloluwa Philip Ojo"
+          git add .
+          git commit -m 'edited kustomization file with new image  tag $TAG for staging environment'
+          git push -q https://$GITHUB_PERSONAL_TOKEN@github.com/themmyloluwaa/quizzler-deployment.git main
+
+
           
 
 
@@ -54,6 +75,13 @@ workflows:
       - publish:
           requires:
            - build
+          filters:
+            branches:
+              only:
+                - main
+      - generateYAML:
+          requires:
+           - publish
           filters:
             branches:
               only:
