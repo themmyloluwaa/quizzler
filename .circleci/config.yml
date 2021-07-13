@@ -47,7 +47,7 @@ jobs:
       - run: |
           TAG=0.$CIRCLE_PREVIOUS_BUILD_NUM
           git clone https://github.com/themmyloluwaa/quizzler-deployment.git /tmp/quizzler-deployment
-          cd /tmp/quizzler-deployment/kubernetes/kustomize/overlays
+          cd /tmp/quizzler-deployment/kubernetes/kustomize/base/overlays
           sed -i 's/\(newTag\)\(.*\)/\1: '$TAG'/' ./staging/kustomization.yaml
           cd ../../../
           git config credential.helper 'cache --timeout=120'
