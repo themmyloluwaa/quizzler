@@ -70,9 +70,17 @@ I created a kustomize folder in the kubernetes folder, and added a base folder t
 The next step is to automate the build and tagging of the Quizzler image. This would be included in the pipeline for the Quizzler application and it would only run on the main branch to ensure we don't build images at every commit. The main branch would serve as the branch handling the deployment of the Quizzler application to production.
 I setup the required job that handles building the image, tagging it using the CI_BUILD_NO and pushing it to my docker hub repository.
 
+![CI Integration Pipeline](https://drive.google.com/uc?export=view&id=16zLFTSXn70ReaMqn10m7f4_hFixaMfYe)
+
 ### Step Six - Deployment
 
 For the deployment aspect of Quizzler, I created a new repository called `quizzler-deployment`. This repository would hold the manifest files for the Quizzler deployment. This is the first step of integrating GitOps into the deployment pipeline of Quizzler. Creating a seperate repository to store the deployment files of Quizzler also gives makes it possible to integrate ArgoCD to manage deploying the Quizzler application to the various data centers as specified in the requirement.
 
 I added a new job called generateYAML which would handle pulling the deployment repository, updating the kustomization file with the new image built and pushing it back to the repository. Once ArgoCD is setup in the cluster, it would monitor this new repository and handle the deployment based on the settings configured.
 
+I created a Kubernetes cluster on AWS using the eksctl cli tool. I created a cluster called quizzler in us-west-2 with worker node of type t2.micro. The command I ran was `eksctl create cluster -n quizzler -t t2.micro -r us-west-2`. eksctl handled creating all the necessary resources like the VPC, subnets, internet gateway, the control planes and attaching the two worker nodes to the AWS managed k8s cluster.
+
+I then created a new namespace called argocd and deployed all the necessary argocd related resources by running
+`kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.0.0-rc3/manifests/install.yaml`.
+
+The argocd related resources was created in this namespace. After that, I updated my argocd account configuration and deployed the [Quizzler Deployment](https://github.com/themmyloluwaa/quizzler-deployment) in the cluster.
