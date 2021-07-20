@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
         - name: quizzler
-          image: codekagei/quizzler:0.1
+          image: codekagei/quizzler:0.77
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           resources:
             limits:
               memory: "128Mi"
-              cpu: "500m"
+              cpu: "100m"
               

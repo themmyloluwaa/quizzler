@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: quizzler-service
+  namespace: quizzler
 spec:
   type: NodePort
   selector:
